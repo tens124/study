@@ -1,0 +1,17 @@
+#incluude<stbio.h>
+main()
+{
+	int input = 101110;	//10진수로 변환할 2진수
+	int di = 1;			//2진수의 각 자리에 2의 n제곱을 곱해주기 위한 변수
+	int sum = 0;
+
+	while(1)
+	{
+		if(input == 0) break;		//무한루프를 2진수의 모든 자리가 사라질 때까지 진행
+		sum = sum + (input%10) * di;	//input%10을 통해 이진수의 가장 마지막 자리를 얻을 수 있음. 이를 2의 n제곱인 di 변수와 곱해줌
+		di = di * 2;				//di에 자릿수가 커질 때마다 2씩 곱해줌
+		input = input/10;			//마지막으로 이진수의 끝자리를 잘라냄
+	}
+
+	printf("%d",sum);
+}
