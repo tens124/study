@@ -1,0 +1,43 @@
+class ClassA
+{
+	ClassA()		//클래스와 이름이 같은 메소드. 이러한 메소드를 생성자라 부르며, 클래스의 객체 변수가 생성될 때 자동으로 실행된다
+	{
+		System.out.print('A');
+		this.prn();
+	}
+	void prn()
+	{
+		System.out.print('B');
+	}
+}
+
+class ClassB extends ClassA			//ClassA를 상속 받는 클래스. 부모 클래스에 속한 변수와 메소드를 사용할 수 있게 됨
+{
+	ClassB()		//생성자. 호출 받으면 가장 먼저 실행되는 메소드
+	{	
+		super();	//부모 클래스를 가리키는 예약어 super. super()를 통해 부모 클래스의 생성자를 호출
+				//A가 출력되고, 그 후 생성자 내부의 prn() 함수를 호출
+				//prn() 함수는 자식 클래스 ClassB에 의해 재정의된 상태. 따라서 ClassB의 prn이 호출됨. E가 출력됨
+		System.out.print('D');	//AE 이후엔 D가 출력됨
+	}	
+	void prn()		//부모 클래스에도 이름이 같은 메소드가 존재. 이를 메소드 오버라이딩(재정의)이라 하며, 자식 클래스의 메소드만 사용할 수 있게 됨
+	{
+		System.out.print('E');
+	}
+	void prn(int x)	//위와 이름이 동일한 메소드. 하지만 매개변수의 자료형과 갯수가 다르므로 서로 다른 메소드가 됨
+				//이처럼 이름이 같은 메소드로 여러 기능을 정의하는 것을 오버로딩이라고 함
+	{
+		System.out.print(x);
+	}
+}
+
+public class Test
+{
+	public static void main(String[] args)
+	{
+		int x = 7;
+		ClassB cal = new ClassB();	//ClassB 객체 변수 cal. ClassB의 생성자를 호출하여 객체를 생성
+		cal.prn(x);				//ClassB 클래스의 prn 메소드에 7을 전달. 오버로딩된 메소드에 의해 7이 출력된다
+							//최종적으로 AED7 출력
+	}
+}
