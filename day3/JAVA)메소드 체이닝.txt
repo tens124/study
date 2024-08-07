@@ -1,0 +1,31 @@
+//메소드 체이닝을 통해 한 줄짜리 코드를 만들어 낼 수 있음. 클래스 내부의 메소드들이 this를 반환하도록 하는 것. 특정 클래스의 인스턴스를 통해 클래스 내부의 메소드를 호출할 수 있기에 유용한 방법
+
+class Example {
+    private int value;		//기본생성자에 의해 0으로 초기화
+
+    	Example setValue(int value)	//Example 객체를 리턴하는 메소드
+	{
+        this.value = value;
+        return this; // 현재 객체(Example)를 반환
+    	}
+
+    	Example incrementValue(int increment) 	//Example 객체를 리턴하는 메소드
+	{
+        this.value += increment;		//value 변수에 전달받은 인수를 더해줌
+        return this; 		// 현재 객체(Example)를 반환
+    	}
+
+    	void display() 
+	{
+        System.out.println("Value: " + value);
+    	}
+}
+
+public class Main 
+{
+	public static void main(String[] args) 
+	{
+        Example example = new Example();
+        example.setValue(10).incrementValue(5).display(); // 메서드 체이닝. 각 메소드는 Example 객체를 반환하기에 내부의 메소드들을 계속 뽑아 쓸 수 있음
+    	}
+}

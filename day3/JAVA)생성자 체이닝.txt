@@ -1,0 +1,47 @@
+//Person 객체를 생성하게 되면 각 생성자의 코드를 따라 오버로딩된 각 생성자들이 연속으로 작동함
+//생성자 체이닝을 사용하면 코드 중복을 줄이고, 여러 생성자에서 공통적인 초기화 작업을 재사용할 수 있게 됨
+//부모 클래스와 자식 클래스를 통해 보다 복잡한 체이닝을 수행하는 것도 가능
+//다만 반드시 효율적인지는 모르겠음. 객체 변수를 생성만 해도 알아서 초기화가 진행되는 것은 좋지만, 클래스 내부에 여러 개의 생성자가 오버로딩 되어 있으니 그냥 인수를 전달하기만 하면 되는 것 아닌가? 생성자 체이닝을 사용할 경우 특정 생성자의 초기값을 결정하기 위해선 내부의 코드를 수정하는 수밖에 없음
+//개방 폐쇄 원칙 위반?
+
+//중복 코드 제거: 여러 생성자에서 공통적으로 필요한 초기화 작업이 있을 때, 이 작업을 하나의 생성자에 집중시킬 수 있음
+//일관된 초기화: 객체의 초기화 로직이 일관되게 수행될 수 있도록 보장. 특히 여러 생성자가 비슷한 초기화 로직을 가지고 있을 때 유용
+//복잡한 초기화 로직: 객체 생성 시 복잡한 초기화 로직이 필요할 때, 생성자 체이닝을 통해 공통적인 초기화 작업을 관리
+
+public class Person 
+{
+	private String name;
+	private int age;
+
+ 	Person() 	// 기본 생성자
+	{
+        this("Unknown", 0);   // 다른 생성자 호출
+    	}
+
+	Person(String name) 	 // 이름만 매개변수로 받는 생성자
+	{
+        this(name, 0); 	// 다른 생성자 호출
+	}
+
+	Person(String name, int age) 	// 모든 필드를 매개변수로 받는 생성자
+	{
+        this.name = name;
+        this.age = age;
+	}
+
+	void display() 
+	{
+        System.out.println("Name: " + name + ", Age: " + age);
+	}
+
+	public static void main(String[] args) 
+	{
+        Person person1 = new Person(); 	// 기본 생성자 호출
+        Person person2 = new Person("Alice"); 	// 이름만 매개변수로 받는 생성자 호출
+        Person person3 = new Person("Bob", 30); 	// 모든 필드를 매개변수로 받는 생성자 호출
+
+        person1.display(); // 출력: Name: Unknown, Age: 0
+        person2.display(); // 출력: Name: Alice, Age: 0
+        person3.display(); // 출력: Name: Bob, Age: 30
+	}
+}
